@@ -1,16 +1,17 @@
-# Video Analytics Service
+# Edge Video Analytics Microservice
 
-This project hosts the artifacts to build and use video analytics service used in Edge Insights Vision (Microservices) and Edge Insights Industrial.
+This repository contains the source code for Edge Video Analytics Microservice used for [Video Analytics Use Case](https://www.intel.com/content/www/us/en/developer/articles/technical/video-analytics-service.html). For information on how to build the use case, please refer to the [Get Started](https://www.intel.com/content/www/us/en/developer/articles/technical/video-analytics-service.html#inpage-nav-3) guide.
+
 
 ## Building the image 
 
 - To build the base image, run the following command
      `docker-compose -f  docker-compose-build.yml  build`
+     
+- You can download the pre-built container image for Edge Video Analytics Microservice from [Docker Hub](https://hub.docker.com/r/intel/edge_video_analytics_microservice)
 
 ## Running the image
 
-
-### In EIV context
 
 - Clone this repo.
 
@@ -43,6 +44,8 @@ models/
 ```
 
 - Run `sudo docker-compose up`.
+
+- Please refer to [Run the Edge Video Analytics Microservice](https://www.intel.com/content/www/us/en/developer/articles/technical/video-analytics-service.html#inpage-nav-3-1) for more details.
 
 
 
