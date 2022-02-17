@@ -1,0 +1,36 @@
+{
+	"type": "GStreamer",
+	"template": ["uridecodebin name=source",
+				" ! gvadetect model={models[object_detection][person_detection][network]} name=detection",
+				" ! gvametaconvert name=metaconvert",
+				" ! appsink name=destination"
+			],
+	"description": "Person Detection based on person-detection-retial-0013",
+	"parameters": {
+		"type": "object",
+		"properties": {
+			"detection-device": {
+				"element": {
+					"name": "detection",
+					"property": "device"
+				},
+				"type": "string"
+			},
+			"detection-model-instance-id": {
+				"element": {
+					"name": "detection",
+					"property": "model-instance-id"
+				},
+				"type": "string"
+			},
+			"inference-interval": {
+				"element": "detection",
+				"type": "integer"
+			},
+			"threshold": {
+				"element": "detection",
+				"type": "number"
+			}
+		}
+	}
+}
