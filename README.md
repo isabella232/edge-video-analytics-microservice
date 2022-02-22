@@ -48,4 +48,6 @@ models/
 - Please refer to [Run the Edge Video Analytics Microservice](https://www.intel.com/content/www/us/en/developer/articles/technical/video-analytics-service.html#inpage-nav-3-1) for more details.
 
 
+## Running in EII mode
 
+- Please refer [README](eii/README.md) for running Edge Video Analytics Microservice in EII mode

@@ -1,7 +1,7 @@
-EII VA Serving Microservice
-===========================
+EII DLStreamer Pipeline Server Microservice
+===========================================
 
-The EII VA Serving (EVAS) Microservice wraps the Intel Video Analytics Serving
+The EII DLStreamer Pipeline Server Microservice wraps the DLStreamer Pipeline Server
 library to provide an EII visual ingestion and analytics module utilizing the
 features and functionality of the library.
 
@@ -12,23 +12,40 @@ built in the context of the EII multi-repo project. Follow the instructions
 [here](https://github.com/open-edge-insights/eii-manifests).
 
 Since the model files are large in size, they are not part of the repo.
-Download the required model files to be used for the pipeline mentioned in 
-[config](./config.json) by referring https://github.com/intel/video-analytics-serving/tree/master/tools/model_downloader
-and have the downloaded model files placed in "/opt/intel/eii/models" 
-directory.
+Download the required model files to be used for the pipeline mentioned in
+[config](./config.json) by referring https://github.com/dlstreamer/pipeline-server/tree/master/tools/model_downloader.
+Please ensure below pre-requisite steps are run to get the example pipelines
+working by referring https://github.com/dlstreamer/pipeline-server/blob/master/README.md
 
 ```sh
+./docker/build.sh
+
+./docker/run.sh -v /tmp:/tmp
+
+./vaclient/vaclient.sh list-pipelines
+```
+
+## Running
+
+Please follow the steps mentioned below to run the DLStreamer Pipeline Server service
+
+```sh
+cd [WORK_DIR]/IEdgeInsights/build
+
 # Execute the builder.py script
-$ python3 buidler.py -f evas.yml
+python3 builder.py -f usecases/evas.yml
 
 # Create some necessary items for the service
-$ sudo mkdir -p /opt/intel/eii/models/
+sudo mkdir -p /opt/intel/eii/models/
+
+# Copy the downloaded model files to /opt/intel/eii
+sudo cp -r models /opt/intel/eii/
 
 # Build the docker containers
-$ docker-compose build
+docker-compose -f docker-compose-build.yml build
 
 # Start the docker containers
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 This repository provides the VA Serving pipeline needed for using a URI source
@@ -75,20 +92,23 @@ where you need to publish to are to be provided in **Publishers** section in
 For enabling injection of frames into the GStreamer pipeline obtained from
 EIIMessageBus, please ensure the following changes are done:
 
-    * The source parameter in [config](config.json) is set to msgbus
-    ```javascript
-       "config": {
-           "source": "msgbus"
-        }
-    ```
+* The source parameter in [config](config.json) is set to msgbus
+ 
+ ```javascript
+    "config": {
+        "source": "msgbus"
+    }
+ ```
 
-    * The template of respective pipeline is set to appsrc as source instead of uridecodebin
-    ```javascript
-       {
-            "type": "GStreamer",
-            "template": ["appsrc name=source",
-                         " ! rawvideoparse",
-                         " ! appsink name=destination"
-                        ]
-        }
-    ```
+* The template of respective pipeline is set to appsrc as source instead of uridecodebin
+
+```javascript
+    {
+        "type": "GStreamer",
+        "template": ["appsrc name=source",
+                     " ! rawvideoparse",
+                     " ! appsink name=destination"
+                    ]
+    }
+```
+
