@@ -4,10 +4,10 @@ Edge Video Analytics Microservice for EII
 The Edge Video Analytics Microservice combines the video ingestion and analytics
 capabilities provided by EII visual ingestion and analytics modules.
 
-## Fetching EII source code
+## Running
 
 Since the EII Edge Video Analytics Microservice depends on EII provisioning,
-it has to be built in EII context by fetching the EII source code.
+it has to be run in EII context by fetching the EII source code.
 Please follow the steps mentioned below to fetch the EII source code
 
 ```sh
@@ -16,8 +16,6 @@ repo init -u "https://github.com/open-edge-insights/eii-manifests.git"
 repo sync
 ```
 For more details, refer [here](https://github.com/open-edge-insights/eii-manifests).
-
-## Running
 
 Since the model files are large in size, they are not part of the repo.
 Download the required model files to be used for the pipeline mentioned in
@@ -48,6 +46,11 @@ sleep 30 # If any failures like configmgr data store client certs or msgbus cert
 docker-compose up -d
 ```
 
+> **Note:**
+>
+> The pre-built container image for Edge Video Analytics Microservice (https://hub.docker.com/r/intel/edge_video_analytics_microservice) gets downloaded when
+> one runs the docker-compose up -d if the image is not already present on the host system.
+
 This repository provides the Deep Learning Streamer(DL Streamer) pipelines needed
 for using a URI source and sending the ingested frames using the EII MsgBus Publisher.
 The commands above which create the, "models/", directory and the, "pipelines/",
@@ -63,8 +66,6 @@ object_detection demo for EII.
 The table below describes each of the configuration attributes currently
 supported.
 
-> **TODO:** Need to document these parameters much more.
-
 |      Parameter      |                                                     Description                                                |
 | :-----------------: | -------------------------------------------------------------------------------------------------------------- |
 | `source`            | Source of the frames, must be `"gstreamer"` or `"msgbus"`.                                                    |
@@ -76,7 +77,7 @@ supported.
 
 ### Configuring the Interfaces
 
-The service only supports launching a single pipeline and publishing on a
+In EII mode, the microservice only supports launching a single pipeline and publishing on a
 single topic currently. This means, in the configuration file ("config.json"),
 the single JSON object in the `Publisher` list is where the configuration
 resides for the published data. See the EII documentation for more details on
