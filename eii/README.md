@@ -22,12 +22,12 @@ For more details, refer [here](https://github.com/open-edge-insights/eii-manifes
 
 
 Complete the pre-requisite of provisioning the EII stack by referring to
-[README.md](https://github.com/open-edge-insights/eii-core/blob/master/README.md#provision) 
+[README.md](https://github.com/open-edge-insights/eii-core/blob/master/README.md#provision)
 
 
 Since the model files are large in size, they are not part of the repo.
 Download the required model files to be used for the pipeline mentioned in [config](./config.json)
-by following the first four steps mentioned in [README](../README.md#running-the-image).
+by following the steps two-four mentioned in [README](../README.md#running-the-image).
 
 
 Run the following commands to set the environment, build ia_configmgr_agent container
@@ -43,7 +43,7 @@ python3 builder.py -f usecases/evas.yml
 sudo mkdir -p /opt/intel/eii/models/
 
 # Copy the downloaded model files to /opt/intel/eii
-sudo cp -r models /opt/intel/eii/
+sudo cp -r [downloaded_model_directory]/models /opt/intel/eii/
 ```
 
 ## Running
@@ -104,7 +104,7 @@ For enabling injection of frames into the GStreamer pipeline obtained from
 EIIMessageBus, please ensure the following changes are made:
 
 * The source parameter in [config](config.json) is set to msgbus
- 
+
  ```javascript
     "config": {
         "source": "msgbus"
