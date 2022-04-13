@@ -123,7 +123,7 @@ class EvasManager:
             }
         }
 
-        if 'model_params' in self.app_cfg:
+        if 'model_parameters' in self.app_cfg:
             model_params.update(self.app_cfg['model_parameters'])
         pipeline = self.app_cfg['pipeline']
         pipeline_version = self.app_cfg['pipeline_version']
