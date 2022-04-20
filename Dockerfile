@@ -144,6 +144,7 @@ RUN pip3 install  --no-cache-dir -r /app/requirements.txt && \
     pip3 install  --no-cache-dir -r /app/requirements.service.txt && \
     rm -rf /app/requirements*.txt
 
+RUN pip3 install markupsafe==2.0.1
 ARG EII_SOCKET_DIR
 RUN mkdir -p /home/${EII_USER_NAME}/ && chown -R ${EII_USER_NAME}:${EII_USER_NAME} /home/${EII_USER_NAME} && \
     mkdir -p ${EII_SOCKET_DIR} && chown -R ${EII_USER_NAME}:${EII_USER_NAME} $EII_SOCKET_DIR 
